@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To-Do List</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-image: url('tdl.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: rgb(11, 11, 11); /* Text color */
+  }
+  h2{
+    text-decoration: underline;
+  }
+  .container {
+    max-width: 600px;
+    margin: auto;
+    padding: 40px 150px;
+    background-color:rgb(111, 168, 175); 
+    border-radius: 10px;
+    align-items: center;
+  }
+  input[type="text"], button {
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+  }
+  input[type="text"] {
+    background-color: rgba(127, 133, 135, 0.8); 
+    color: #000000; 
+  }
+  button {
+    background-color:rgb(214, 24, 21); 
+    color: #ffffff;
+    cursor: pointer;
+  }
+  .task-list {
+    margin-top: 20px;
+  }
+  h1{
+    text-align: center;
+    text-decoration:wavy;
+  }
+  .task {
+    margin: 5px;
+    padding: 10px;
+    background-color: grey;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .complete {
+    text-decoration: line-through;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>My To-Do List</h1>
+  <input type="text" id="taskInput" placeholder="Enter a new task">
+  <button onclick="addTask()">Add Task</button>
+  <div id="tasks" class="task-list">
+  </div>
+</div>
+
+<script>
+  function addTask() {
+    var taskInput = document.getElementById('taskInput');
+    var tasks = document.getElementById('tasks');
+    var newTask = document.createElement('div');
+    newTask.classList.add('task');
+    newTask.innerHTML = `
+      <span>${taskInput.value}</span>
+      <button onclick="markComplete(this)">Complete</button>
+      <button onclick="deleteTask(this)">Delete</button>
+    `;
+    tasks.appendChild(newTask);
+    taskInput.value = '';
+  }
+
+  function markComplete(button) {
+    var task = button.parentElement;
+    task.classList.toggle('complete');
+  }
+
+  function deleteTask(button) {
+    var task = button.parentElement;
+    task.remove();
+  }
+</script>
+</body>
+</html>
